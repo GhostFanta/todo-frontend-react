@@ -1,0 +1,32 @@
+// Action for Functional State
+export const ADD_TODO_ITEM = 'ADD_TODO_ITEM';
+export const DELETE_TODO_ITEM = 'DELETE_TODO_ITEM';
+export const UPDATE_TODO_ITEM = 'UPDATE_TODO_ITEM';
+export const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';
+
+export const ADD_TODO_ITEM_NEW = 'ADD_TODO_ITEM_NEW';
+export const DELETE_TODO_ITEM_NEW = 'DELETE_TODO_ITEM_NEW';
+export const UPDATE_TODO_ITEM_NEW = 'UPDATE_TODO_ITEM_NEW';
+export const TOGGLE_COMPLETED_NEW = 'TOGGLE_COMPLETED_NEW';
+
+export const ADD_TODO_LIST = 'ADD_TODO_LIST';
+export const DELETE_TODO_LIST = 'DELETE_TODO_LIST';
+export const UPDATE_TODO_LIST = 'UPDATE_TODO_LIST';
+export const SET_ACTIVE_TODO_LIST = 'SET_ACTIVE_TODO_LIST';
+
+export const SHOW_ALL = 'SHOW_ALL';
+export const SHOW_COMPLETED = 'SHOW_COMPLETED';
+export const SHOW_INCOMPLETED = 'SHOW_INCOMPLETED';
+export const REMOVE_COMPLETED = 'REMOVE_COMPLETED';
+
+export const SUBMIT_REQUESTED = 'SUBMIT_REQUESTED';
+export const SUBMIT_SUCCESSFUL = 'SUBMIT_SUCCESSFUL';
+export const SUBMIT_FAILED = 'SUBMIT_FAILED';
+
+// Action for Auth state
+export const IS_LOGGING_IN = 'LOGGING_IN';
+export const LOGGED_IN = 'LOGGED_IN';
+export const LOG_OUT = 'LOG_OUT';
+
+// Action for UI State
+export const TODO_LISTS_LOADING = 'TODO_LISTS_LOADING';
