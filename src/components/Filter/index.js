@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import Cached from '@material-ui/icons/Cached';
-import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
-import {Paper, withStyles, Button} from '@material-ui/core';
+import React, { Component } from 'react'
+import Cached from '@material-ui/icons/Cached'
+import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
+import { Paper, withStyles, Button } from '@material-ui/core'
 
 const styles = {
   root: {
@@ -9,47 +9,47 @@ const styles = {
   },
   removecompleted: {
     float: 'right',
-    backgroundColor: 'red',
+    backgroundColor: 'red'
   },
   sync: {
     float: 'right',
-    backgroundColor: 'green',
+    backgroundColor: 'green'
   }
 
 }
 
 class Filter extends Component {
-  constructor(props) {
-    super(props);
-    this.onShowAll = this.onShowAll.bind(this);
-    this.onShowCompleted = this.onShowCompleted.bind(this);
-    this.onShowIncompleted = this.onShowIncompleted.bind(this);
-    this.onRemoveCompleted = this.onRemoveCompleted.bind(this);
-    this.onSync = this.onSync.bind(this);
+  constructor (props) {
+    super(props)
+    this.onShowAll = this.onShowAll.bind(this)
+    this.onShowCompleted = this.onShowCompleted.bind(this)
+    this.onShowIncompleted = this.onShowIncompleted.bind(this)
+    this.onRemoveCompleted = this.onRemoveCompleted.bind(this)
+    this.onSync = this.onSync.bind(this)
   }
 
-  onShowAll() {
-    this.props.show_all(this.props.listid);
+  onShowAll () {
+    this.props.show_all(this.props.listid)
   }
 
-  onShowCompleted() {
-    this.props.show_completed(this.props.listid);
+  onShowCompleted () {
+    this.props.show_completed(this.props.listid)
   }
 
-  onShowIncompleted() {
-    this.props.show_incompleted(this.props.listid);
+  onShowIncompleted () {
+    this.props.show_incompleted(this.props.listid)
   }
 
-  onRemoveCompleted() {
-    this.props.remove_completed(this.props.listid);
+  onRemoveCompleted () {
+    this.props.remove_completed(this.props.listid)
   }
 
-  onSync() {
-    this.props.submit(this);
+  onSync () {
+    this.props.submit(this)
   }
 
-  render() {
-    const {classes} = this.props;
+  render () {
+    const { classes } = this.props
     return (
       <div>
         <Paper>
@@ -65,4 +65,4 @@ class Filter extends Component {
   }
 }
 
-export default withStyles(styles)(Filter);
+export default withStyles(styles)(Filter)

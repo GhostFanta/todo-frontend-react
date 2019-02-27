@@ -2,8 +2,8 @@ import {
   ADD_TODO_ITEM_NEW,
   DELETE_TODO_ITEM_NEW,
   UPDATE_TODO_ITEM_NEW
-} from "../constants/actionType";
-import uuid from 'uuid';
+} from '../constants/actionType'
+import uuid from 'uuid'
 
 const newlistReducer = (state = {}, action) => {
   switch (action.type) {
@@ -16,23 +16,22 @@ const newlistReducer = (state = {}, action) => {
             ...state.todos,
             [uuid()]: {
               content: action.content,
-              completed: false,
+              completed: false
             }
           }
         }
-
-      });
+      })
     case DELETE_TODO_ITEM_NEW:
       return Object.assign({}, state, {
         ...state,
         newtodolist: {
           ...state.newtodolist,
           todos: Object.keys(state.todos).reduce((res, k) => {
-            if (k !== action.todoid) res[k] = state.todos[k];
-            return res;
+            if (k !== action.todoid) res[k] = state.todos[k]
+            return res
           }, {})
         }
-      });
+      })
     case UPDATE_TODO_ITEM_NEW:
       return Object.assign({}, state, {
         ...state,
@@ -42,14 +41,14 @@ const newlistReducer = (state = {}, action) => {
             ...state.todos,
             [action.todoid]: {
               content: action.content,
-              completed: false,
+              completed: false
             }
           }
         }
-      });
+      })
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default newlistReducer;
+export default newlistReducer

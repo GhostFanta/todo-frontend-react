@@ -1,13 +1,13 @@
-import React from 'react';
-import {Component} from 'react';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import {Typography, TextField, withStyles} from '@material-ui/core';
-import {withRouter} from 'react-router';
+import React from 'react'
+import { Component } from 'react'
+import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+import { Typography, TextField, withStyles } from '@material-ui/core'
+import { withRouter } from 'react-router'
 
-import TodoItem from '../TodoItem';
-import Filter from '../Filter';
-import {SHOW_ALL, SHOW_COMPLETED} from '../../constants/actionType';
+import TodoItem from '../TodoItem'
+import Filter from '../Filter'
+import { SHOW_ALL, SHOW_COMPLETED } from '../../constants/actionType'
 
 const styles = {
   root: {
@@ -18,80 +18,80 @@ const styles = {
     transform: 'translate(-50%, -40%)'
   },
   title: {
-    fontSize: 30,
+    fontSize: 30
   }
-};
+}
 
 class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.onAddButtonClick = this.onAddButtonClick.bind(this);
-    this.onAddTodoChange = this.onAddTodoChange.bind(this);
-    this.onEnterClick = this.onEnterClick.bind(this);
-    this.onDoubleClickTitle = this.onDoubleClickTitle.bind(this);
+  constructor (props) {
+    super(props)
+    this.onAddButtonClick = this.onAddButtonClick.bind(this)
+    this.onAddTodoChange = this.onAddTodoChange.bind(this)
+    this.onEnterClick = this.onEnterClick.bind(this)
+    this.onDoubleClickTitle = this.onDoubleClickTitle.bind(this)
 
     this.state = {
       addingTodo: false,
       edittingTitle: false,
       edittingTodo: false,
       titleToBeChanged: ''
-    };
+    }
   }
 
-  componentWillReceiveProps() {
-    const {listid} = this.props.match.params;
-    this.props.set_active_todolist(listid);
+  componentWillReceiveProps () {
+    const { listid } = this.props.match.params
+    this.props.set_active_todolist(listid)
   }
 
-  onAddButtonClick() {
+  onAddButtonClick () {
     if (this.state.todoTobeAdded !== '') {
-      this.props.add_todo_item(this.props.listid, this.state.todoTobeAdded);
-      this.setState({todoTobeAdded: ''});
+      this.props.add_todo_item(this.props.listid, this.state.todoTobeAdded)
+      this.setState({ todoTobeAdded: '' })
     }
   }
 
-  onEnterClick(e) {
-    e.preventDefault();
+  onEnterClick (e) {
+    e.preventDefault()
     if (e.key === 'Enter') {
-      this.onAddButtonClick();
+      this.onAddButtonClick()
     }
   }
 
-  onTitleChangeFinshed(e) {
-    e.preventDefault();
+  onTitleChangeFinshed (e) {
+    e.preventDefault()
     if (e.key === 'Enter') {
-      this.setState({edittingTitle: false});
+      this.setState({ edittingTitle: false })
       if (e.target.value !== '') {
-        this.props.update_todo_list(e.target.value);
+        this.props.update_todo_list(e.target.value)
       }
     }
   }
 
-  onDoubleClickTitle() {
-    this.setState({edittingTitle: true});
+  onDoubleClickTitle () {
+    this.setState({ edittingTitle: true })
   }
 
-  onAddTodoChange(e) {
-    this.setState({todoTobeAdded: e.target.value});
+  onAddTodoChange (e) {
+    this.setState({ todoTobeAdded: e.target.value })
   }
 
-  render() {
-    const {classes} = this.props;
-    const visualTodos = this.props.visibility === SHOW_ALL ?
-      this.props.todos :
-      this.props.visibility === SHOW_COMPLETED ?
-        Object.keys(this.props.todos).reduce((filtered, key) => {
+  render () {
+    const { classes } = this.props
+    const visualTodos = this.props.visibility === SHOW_ALL
+      ? this.props.todos
+      : this.props.visibility === SHOW_COMPLETED
+        ? Object.keys(this.props.todos).reduce((filtered, key) => {
           if (this.props.todos[key].completed === true) {
             filtered[key] = this.props.todos[key]
-          };
-          return filtered;
-        }, {}) :
-        Object.keys(this.props.todos).reduce((filtered, key) => {
+          }
+          return filtered
+        }, {})
+        : Object.keys(this.props.todos).reduce((filtered, key) => {
           if (this.props.todos[key].completed === false) {
             filtered[key] = this.props.todos[key]
-          };
-          return filtered;
-        }, {});
+          }
+          return filtered
+        }, {})
     return (
       <div className='TodoList'>
         <Paper className={classes.root}>
@@ -100,23 +100,23 @@ class TodoList extends Component {
               <TextField value={this.props.title} onBlur={this.updateTitleFinished}/>
             ) : (
               <Typography className={classes.title} onDoubleClick={this.onDoubleClickTitle}
-                          value={this.props.title}/>
+                value={this.props.title}/>
             )
           }
           <TextField onChange={this.onAddTodoChange} onKeyPress={this.onEnterClick}
-                     placeholder='Input incoming task' value={this.state.todoTobeAdded}/>
+            placeholder='Input incoming task' value={this.state.todoTobeAdded}/>
 
           <Button onClick={this.onAddButtonClick}>Add</Button>
           {
             Object.keys(visualTodos).map((todoid) => {
               return <TodoItem key={todoid}
-                               todoid={todoid}
-                               listid={this.props.listid}
-                               content={this.props.todos[todoid].content}
-                               completed={this.props.todos[todoid].completed}
-                               delete_todo_item={this.props.delete_todo_item}
-                               update_todo_item={this.props.update_todo_item}
-                               toggle_completed={this.props.toggle_completed}
+                todoid={todoid}
+                listid={this.props.listid}
+                content={this.props.todos[todoid].content}
+                completed={this.props.todos[todoid].completed}
+                delete_todo_item={this.props.delete_todo_item}
+                update_todo_item={this.props.update_todo_item}
+                toggle_completed={this.props.toggle_completed}
               >
               </TodoItem>
             })
@@ -136,4 +136,4 @@ class TodoList extends Component {
   }
 }
 
-export default withRouter(withStyles(styles)(TodoList));
+export default withRouter(withStyles(styles)(TodoList))

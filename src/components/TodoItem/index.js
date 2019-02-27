@@ -26,7 +26,7 @@ class TodoItem extends Component {
     this.onToggleEditing = this.onToggleEditing.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
-    this.handleDelete = this.handleDelete.bind(this)
+    this.handleDelete = this.handleDelete.bind(this);
     this.state = {
       isEditting: false,
       content: this.props.content,

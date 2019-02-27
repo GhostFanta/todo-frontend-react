@@ -9,6 +9,7 @@
 + react-redux(state management)
 + react-thunk(async action) 
 + superagent(rest api client)
++ jtest(testing)
 
 #### Requirement:
 + node >= 10.15.0
@@ -22,5 +23,10 @@ yarn install
 + start the app locally:
 ```angular2html
 yarn start
+```
+
++ deploy the app to s3:
+```angular2html
+yarn deploy
 ```
 

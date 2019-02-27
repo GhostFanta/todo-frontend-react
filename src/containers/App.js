@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {Switch, Route} from 'react-router-dom';
+import React, {Component} from 'react'
+import {Switch, Route} from 'react-router-dom'
 import Header from '../components/Header'
-import TodoLists from './TodoLists';
-import TodoList from './TodoList';
-import AddNewList from './AddNewList';
-import NotFound from '../components/Notmatch';
-import Signup from '../components/Signup';
-import Login from '../components/Login';
+import TodoLists from './TodoLists'
+import TodoList from './TodoList'
+import AddNewList from './AddNewList'
+import NotFound from '../components/Notmatch'
+import Signup from '../components/Signup'
+import Login from '../components/Login'
 
 class App extends Component {
   render() {
@@ -21,9 +21,10 @@ class App extends Component {
           <Route path={`/signup`} component={Signup}/>
           <Route component={NotFound}/>
         </Switch>
+
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

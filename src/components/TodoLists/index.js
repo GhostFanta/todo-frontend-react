@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import {
   Card,
@@ -7,24 +7,24 @@ import {
   CardContent,
   Typography,
   Button
-} from '@material-ui/core';
-import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
+} from '@material-ui/core'
+import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
 
-import Grid from '@material-ui/core/Grid';
-import {withStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 10,
+    marginTop: 10
   },
   paper: {
-    margin: 10,
+    margin: 10
   },
   delete: {
     width: '100%',
     '&:hover': {
-      backgroundColor: 'red',
+      backgroundColor: 'red'
     }
   },
   created: {
@@ -36,7 +36,7 @@ const styles = theme => ({
     marginBlockStart: '1em',
     marginBlockEnd: '1em',
     marginInlineStart: '0px',
-    marginInlineEnd: '0px',
+    marginInlineEnd: '0px'
   },
   modified: {
     fontSize: '0.875rem',
@@ -47,27 +47,27 @@ const styles = theme => ({
     marginBlockStart: '1em',
     marginBlockEnd: '1em',
     marginInlineStart: '0px',
-    marginInlineEnd: '0px',
+    marginInlineEnd: '0px'
   }
-});
+})
 
 class TodoLists extends Component {
-  constructor(props) {
-    super(props);
-    this.onDeleteTodolist = this.onDeleteTodolist.bind(this);
-    this.setActive = this.setActive.bind(this);
+  constructor (props) {
+    super(props)
+    this.onDeleteTodolist = this.onDeleteTodolist.bind(this)
+    this.setActive = this.setActive.bind(this)
   }
 
-  onDeleteTodolist(listid) {
-    this.props.delete_todo_list(listid);
+  onDeleteTodolist (listid) {
+    this.props.delete_todo_list(listid)
   }
 
-  setActive(listid) {
+  setActive (listid) {
     this.props.set_active_todolist(listid)
   }
 
-  render() {
-    const {classes} = this.props;
+  render () {
+    const { classes } = this.props
     return (
       <div>
         <Grid container className={classes.root} spacing={16}>
@@ -76,7 +76,7 @@ class TodoLists extends Component {
               Object.keys(this.props.todolists.todolists).map((listid) => {
                 return (
                   <Card key={listid} className={classes.paper}>
-                    <Link style={{textDecoration: 'none'}} to={{pathname: `/todolist/${listid}`}}>
+                    <Link style={{ textDecoration: 'none' }} to={{ pathname: `/todolist/${listid}` }}>
                       <CardActionArea>
                         <CardContent onClick={() => this.setActive(listid)}>
                           <Typography gutterBottom variant='h5' component='h2'>
@@ -89,7 +89,7 @@ class TodoLists extends Component {
                       </CardActionArea>
                     </Link>
                     <Button className={classes.delete}
-                            onClick={() => this.onDeleteTodolist(listid)}><DeleteOutlined/></Button>
+                      onClick={() => this.onDeleteTodolist(listid)}><DeleteOutlined/></Button>
                   </Card>
                 )
               })
@@ -101,4 +101,4 @@ class TodoLists extends Component {
   }
 }
 
-export default withStyles(styles)(TodoLists);
+export default withStyles(styles)(TodoLists)

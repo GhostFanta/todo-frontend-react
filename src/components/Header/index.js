@@ -1,11 +1,10 @@
-import React from 'react';
-import {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {withStyles} from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-
+import React from 'react'
+import {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {withStyles} from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
 
 const styles = {
   root: {
@@ -22,27 +21,26 @@ const styles = {
 
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
+    color: 'white',
+    textDecoration: 'none'
+  }
+}
 
 class Header extends Component {
   constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
+    super(props)
+    this.logout = this.logout.bind(this)
   }
 
-
   logout() {
-    this.props.logout();
+    this.props.logout()
   }
 
   render() {
-    const {classes} = this.props;
+    const {classes} = this.props
     return (
       <div className='header'>
         <div>
@@ -57,8 +55,10 @@ class Header extends Component {
                 )
                 : (
                   <div>
-                    <Button color="inherit"><Link color="inherit" to='/login'></Link>Login</Button>
-                    <Button color="inherit"><Link color="inherit" to='/signup'></Link>Signup</Button>
+                    <Link className={classes.menuButton} color="inherit" to='/login'><Button className={classes.menuButton}
+                                                              color="inherit">Login</Button></Link>
+                    <Link className={classes.menuButton} color="inherit" to='/signup'><Button className={classes.menuButton}
+                                                               color="inherit">Signup</Button></Link>
                   </div>
                 )
             }
@@ -69,4 +69,4 @@ class Header extends Component {
   }
 }
 
-export default withStyles(styles)(Header);
+export default withStyles(styles)(Header)

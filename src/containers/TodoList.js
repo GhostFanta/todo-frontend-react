@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux'
 import {
   update_todo_list,
 
@@ -10,10 +10,10 @@ import {
   show_all,
   show_incompleted,
   show_completed,
-  remove_completed, set_active_todo_list,
-} from '../actions/todolistsActions';
+  remove_completed, set_active_todo_list
+} from '../actions/todolistsActions'
 
-import TodoList from '../components/TodoList';
+import TodoList from '../components/TodoList'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
     todos: state.todolists.todolists[ownProps.match.params.listid].todos,
     visibility: state.todolists.todolists[ownProps.match.params.listid].visibility
   }
-};
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -37,8 +37,8 @@ const mapDispatchToProps = dispatch => {
     show_completed: (listid) => dispatch(show_completed(listid)),
     remove_completed: (listid) => dispatch(remove_completed(listid)),
 
-    set_active_todolist: (listid) => dispatch(set_active_todo_list(listid)),
+    set_active_todolist: (listid) => dispatch(set_active_todo_list(listid))
   }
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
