@@ -15,11 +15,16 @@ import {
   UPDATE_TODO_ITEM,
   TOGGLE_COMPLETED,
 
+  // Api related
+  REQUEST_TODOLISTS,
+  RECEIVE_TODOLISTS,
+  INVALIDATE_TODOLISTS,
+
   // Visibility
   SHOW_ALL,
   SHOW_COMPLETED,
   SHOW_INCOMPLETED,
-  REMOVE_COMPLETED
+  REMOVE_COMPLETED,
 } from '../constants/actionType'
 import produce from 'immer'
 
@@ -34,6 +39,8 @@ const todoids = ['24751e44-1084-4874-973f-609c4940205b',
 
 const todoListsReducerInitState = {
   activelistid: null,
+  isFetching: false,
+  didInvalidate: true,
   todolists: {
     [listids[0]]: {
       title: 'list1',
@@ -162,12 +169,12 @@ const todoListsReducer = (state = todoListsReducerInitState, action) => {
             todos: {
               ...state.todolists[action.listid].todos,
               [action.todoid]: {
+                ...state.todolists[action.listid].todos[action.todoid],
                 content: action.content
               }
             }
           }
         }
-
       }
     case TOGGLE_COMPLETED:
       return {
@@ -236,6 +243,24 @@ const todoListsReducer = (state = todoListsReducerInitState, action) => {
             }, {})
           }
         }
+      }
+    case INVALIDATE_TODOLISTS:
+      return {
+        ...state,
+        didInvalidate: true
+      }
+    case REQUEST_TODOLISTS:
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      }
+    case RECEIVE_TODOLISTS:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        todolists: action.todolists
       }
     default:
       return state
