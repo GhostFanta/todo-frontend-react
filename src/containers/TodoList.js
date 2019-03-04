@@ -16,6 +16,7 @@ import {
 import TodoList from '../components/TodoList'
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state.todolists)
   return {
     listid: ownProps.match.params.listid,
     title: state.todolists.todolists[ownProps.match.params.listid].title,
@@ -37,7 +38,9 @@ const mapDispatchToProps = dispatch => {
     show_completed: (listid) => dispatch(show_completed(listid)),
     remove_completed: (listid) => dispatch(remove_completed(listid)),
 
-    set_active_todolist: (listid) => dispatch(set_active_todo_list(listid))
+    set_active_todolist: (listid) => dispatch(set_active_todo_list(listid)),
+
+    dispatch
   }
 }
 

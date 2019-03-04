@@ -1,21 +1,20 @@
 const request = require('superagent');
 
+// const BASE_URL = 'http://159.203.17.226:3000';
 const BASE_URL = 'http://localhost:3000';
 
-export default agent = {
-  login: (username, password) => {
-    request.post(`${BASE_URL}/user/login`)
+const agent = {
+  login: (email, password) => {
+    console.log(`loggingin with email ${email}`)
+    return request.post(`${BASE_URL}/user/login`)
       .set('Accept', 'application/json')
-      .send({username: username})
-      .send({password: password})
+      .set('Access-Control-Allow-Headers', true)
+      .set('Access-Control-Allow-Origin', '*')
+      .send({
+        email: email,
+        password: password
+      })
       .accept('application/json')
-      .then((res) => {
-        console.log(res.status);
-        console.log(res.headers);
-        console.log(res.body);
-      }).catch((err) => {
-      console.log(err);
-    });
   },
   logout: (token) => {
     request.post(`${BASE_URL}/user/logout`)
@@ -28,7 +27,7 @@ export default agent = {
     })
   },
 
-  createUser: (body) => {
+  signup: (body) => {
     request.post(`${BASE_URL}/signup`)
       .set('Accept', 'application/json')
       .send(body)
@@ -68,33 +67,16 @@ export default agent = {
       .set('x-auth', token)
       .send(body)
       .then((res) => {
-
+        console.log(res);
       }).catch((err) => {
       console.log(err);
     });
   },
   getTodolists: (token) => {
-    request.get(`${BASE_URL}/`)
+    return request.get(`${BASE_URL}/`)
       .set('Accept', 'application/json')
       .set('x-auth', token)
-      .then((res) => {
-        return Promise(res);
-        console.log(res.status);
-        console.log(res.headers);
-        console.log(res.body);
-      }).catch((err) => {
-      console.log(err);
-    });
-  },
-  getTodolist: (token, listid) => {
-    request.get(`${BASE_URL}/todolist/${listid}`)
-      .set('Accept', 'application/json')
-      .set('x-auth', token)
-      .then((res) => {
-        console.log(res.body);
-      }).catch((err) => {
-      console.log(err);
-    });
+      .then((res) => res)
   },
   updateTodolist: (token, listid, body) => {
     request.put(`${BASE_URL}/todolist/`)
@@ -119,3 +101,5 @@ export default agent = {
     })
   },
 }
+
+export default agent;

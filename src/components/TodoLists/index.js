@@ -1,17 +1,18 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 import {
   Card,
   CardActionArea,
   CardContent,
   Typography,
-  Button
+  Button,
+  CircularProgress
 } from '@material-ui/core'
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined'
 
 import Grid from '@material-ui/core/Grid'
-import { withStyles } from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: {
@@ -19,7 +20,8 @@ const styles = theme => ({
     marginTop: 10
   },
   paper: {
-    margin: 10
+    margin: 10,
+    width: '300px'
   },
   delete: {
     width: '100%',
@@ -52,50 +54,58 @@ const styles = theme => ({
 })
 
 class TodoLists extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onDeleteTodolist = this.onDeleteTodolist.bind(this)
     this.setActive = this.setActive.bind(this)
   }
 
-  onDeleteTodolist (listid) {
+  onDeleteTodolist(listid) {
     this.props.delete_todo_list(listid)
   }
 
-  setActive (listid) {
+  componentDidMount() {
+    // this.props.fetch_data()
+  }
+
+  setActive(listid) {
     this.props.set_active_todolist(listid)
   }
 
-  render () {
-    const { classes } = this.props
+  render() {
+    const {classes} = this.props
     return (
       <div>
-        <Grid container className={classes.root} spacing={16}>
-          <Grid container justify='center' spacing={8}>
-            {
-              Object.keys(this.props.todolists.todolists).map((listid) => {
-                return (
-                  <Card key={listid} className={classes.paper}>
-                    <Link style={{ textDecoration: 'none' }} to={{ pathname: `/todolist/${listid}` }}>
-                      <CardActionArea>
-                        <CardContent onClick={() => this.setActive(listid)}>
-                          <Typography gutterBottom variant='h5' component='h2'>
-                            <p>{this.props.todolists.todolists[listid].title}</p>
-                            <p className={classes.created}>created: {this.props.todolists.todolists[listid].created}</p>
-                            <p className={classes.modified}>last
-                              modified: {this.props.todolists.todolists[listid].modified}</p>
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Link>
-                    <Button className={classes.delete}
-                      onClick={() => this.onDeleteTodolist(listid)}><DeleteOutlined/></Button>
-                  </Card>
-                )
-              })
-            }
+        {this.props.isFetching ?
+          <CircularProgress/> :
+          <Grid container className={classes.root} spacing={16}>
+            <Grid container justify='center' spacing={8}>
+              {
+                Object.keys(this.props.todolists.todolists).map((listid) => {
+                  return (
+                    <Card key={listid} className={classes.paper}>
+                      <Link style={{textDecoration: 'none'}} to={{pathname: `/todolist/${listid}`}}>
+                        <CardActionArea>
+                          <CardContent onClick={() => this.setActive(listid)}>
+                            <Typography gutterBottom variant='h5' component='h2'>
+                              <p>{this.props.todolists.todolists[listid].title}</p>
+                              <p
+                                className={classes.created}>created: {this.props.todolists.todolists[listid].created}</p>
+                              <p className={classes.modified}>last
+                                modified: {this.props.todolists.todolists[listid].modified}</p>
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Link>
+                      <Button className={classes.delete}
+                              onClick={() => this.onDeleteTodolist(listid)}><DeleteOutlined/></Button>
+                    </Card>
+                  )
+                })
+              }
+            </Grid>
           </Grid>
-        </Grid>
+        }
       </div>
     )
   }

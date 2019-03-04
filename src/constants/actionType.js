@@ -23,7 +23,6 @@ export const REMOVE_COMPLETED = 'REMOVE_COMPLETED'
 // -- data retrieval
 export const REQUEST_TODOLISTS = 'REQUEST_TODOLISTS'
 export const RECEIVE_TODOLISTS = 'RECEIVE_TODOLISTS'
-export const SELECT_TODOLISTS = 'SELECT_TODOLISTS'
 export const INVALIDATE_TODOLISTS = 'INVALIDATE_TODOLISTS'
 
 // -- data update/delete/create
@@ -32,9 +31,10 @@ export const DELETE_TODOLIST_REMOTE = 'DELETE_TODOLIST'
 export const ADD_TODOLIST_REMOTE = 'ADD_TODOLIST_REMOTE'
 
 // Action for Auth state
-export const IS_LOGGING_IN = 'LOGGING_IN'
-export const LOGGED_IN = 'LOGGED_IN'
-export const LOG_OUT = 'LOG_OUT'
+export const REQUEST_LOGIN = 'REQUEST_LOGIN'
+export const RECEIVE_AUTH_TOKEN = 'RECEIVE_AUTH_TOKEN'
+export const LOGIN_FAILED = 'LOGIN_FAILED'
 
-// Action for UI State
-export const TODO_LISTS_LOADING = 'TODO_LISTS_LOADING'
+export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
+export const REMOVE_AUTH_TOKEN = 'REMOVE_AUTH_TOKEN'
+export const LOGOUT_FAILED = 'LOGOUT_FAILED'
