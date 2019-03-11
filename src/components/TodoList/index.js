@@ -20,7 +20,6 @@ const styles = {
   progress:{
 
   }
-
 }
 
 class TodoList extends Component {

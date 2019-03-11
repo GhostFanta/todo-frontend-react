@@ -1,6 +1,7 @@
 import moment from 'moment'
 import uuid from 'uuid'
 import {DAY_MONTH_YEAR} from '../constants/formatting'
+
 import {
   // TodoListRelated
   UPDATE_TODO_LIST,
@@ -19,6 +20,7 @@ import {
   REQUEST_TODOLISTS,
   RECEIVE_TODOLISTS,
   INVALIDATE_TODOLISTS,
+  RESET_FETCHSTATE_ON_FAIL,
 
   // Visibility
   SHOW_ALL,
@@ -248,6 +250,12 @@ const todoListsReducer = (state = todoListsReducerInitState, action) => {
       return {
         ...state,
         didInvalidate: true
+      }
+    case RESET_FETCHSTATE_ON_FAIL:
+      return{
+        ...state,
+        didInvaildata: false,
+        isFetching:false
       }
     case REQUEST_TODOLISTS:
       return {

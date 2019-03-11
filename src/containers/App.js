@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Switch, Route} from 'react-router-dom'
+import PrivateRoute from 'react-private-route'
 import {connect} from 'react-redux'
 import Header from '../components/Header'
 import TodoLists from './TodoLists'
@@ -13,10 +14,11 @@ import {fetchTodolists, fetchTodolistIfNeeded, invalidateTodolists} from "../act
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleRefreshClick = this.handleRefreshClick.bind(this);
+    this.handleRefreshClick = this.handleRefreshClick.bind(this)
   }
 
   componentWillMount() {
+    console.log('componentWillMount')
     const {dispatch} = this.props
     dispatch(fetchTodolists())
   }
@@ -38,9 +40,11 @@ class App extends Component {
       <div className="App">
         <Header useremail={this.props.useremail}/>
         <Switch>
-          <Route path='/' exact component={TodoLists}/>
-          <Route path='/addnewlist' component={AddNewList}/>
-          <Route path={`/todolist/:listid`} component={TodoList}/>
+          <PrivateRoute path='/' exact component={TodoLists} isAuthenticated={this.props.isAuthed} redirected='/login'/>
+          <PrivateRoute path='/addnewlist' component={AddNewList} isAuthenticated={this.props.isAuthed}
+                        redirected='/login'/>
+          <PrivateRoute path={`/todolist/:listid`} component={TodoList} isAuthenticated={this.props.isAuthed}
+                        redirected='/login'/>
           <Route path={`/login`} component={Login}/>
           <Route path={`/signup`} component={Signup}/>
           <Route component={NotFound}/>
@@ -50,4 +54,12 @@ class App extends Component {
   }
 }
 
-export default connect(null)(App)
+const mapStateToProps = state => {
+  return {
+    isAuthed: state.auth.authtoken !== '' &&
+    state.auth.authtoken !== null &&
+    state.auth.authtoken !== undefined
+  }
+}
+
+export default connect(mapStateToProps)(App)

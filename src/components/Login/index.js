@@ -22,11 +22,13 @@ class Login extends Component {
   }
 
   onLogin() {
-    console.log(this.props)
-    this.props.login(this.state.email, this.state.password)
-    if(this.props.authtoken){
-      this.props.history.push('/')
-    }
+    this.props.login(this.state.email, this.state.password).then((res) => {
+      this.props.invalidateTodolists()
+      if (res.authtoken) {
+        this.props.history.push('/')
+      }
+    })
+
   }
 
   handleEmailChange(e) {

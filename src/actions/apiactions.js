@@ -3,7 +3,8 @@ import agent from '../agent'
 import {
   REQUEST_TODOLISTS,
   RECEIVE_TODOLISTS,
-  INVALIDATE_TODOLISTS
+  INVALIDATE_TODOLISTS,
+  RESET_FETCHSTATE_ON_FAIL
 } from "../constants/actionType";
 
 
@@ -28,18 +29,28 @@ export const receiveTodolists = (json) => {
   }
 }
 
+export const resetFetchingStateOnFail = () => {
+  return {
+    type: RESET_FETCHSTATE_ON_FAIL
+  }
+}
+
 // retrieve the list of all todolists
 export const fetchTodolists = () => {
-  return dispatch => {
+  return (dispatch,getState) => {
+    const token = getState().auth.authtoken
     dispatch(requestTodolists())
-    return agent.getTodolists('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzdhZWNlYjY4ZTU4ODBhNjJjNmNhYTkiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTUxNTU5OTE1fQ.1W54UIuxAoIX1FMd5O_zO9QgrcWxZbSbFErAm6ykTs4')
+    return agent.getTodolists(token)
       .then((json) => {
           dispatch(receiveTodolists(JSON.parse(json.text).reduce((obj, item) => {
             obj[item._id] = item
             return obj
           }, {})))
         }
-      )
+      ).catch((e) => {
+        console.log(e)
+        dispatch(resetFetchingStateOnFail())
+      })
   }
 }
 
