@@ -24,6 +24,7 @@ const authReducer = (state = authReducerInitState, action) => {
       }
     case REQUEST_LOGOUT:
       return {
+        ...state,
         isLoggingout: true
       }
     case RECEIVE_AUTH_TOKEN:
@@ -34,6 +35,7 @@ const authReducer = (state = authReducerInitState, action) => {
       }
     case REMOVE_AUTH_TOKEN:
       return {
+        ...state,
         isLoggingout: false,
         authtoken: null
       }

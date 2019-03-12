@@ -44,6 +44,7 @@ export const requestLogout = () => {
 }
 
 export const removeAuthTokenFromServer = () => {
+  console.log('removeAuthTokenFromServer')
   return {
     type: REMOVE_AUTH_TOKEN
   }
@@ -57,12 +58,18 @@ export const logoutFailed = (err) => {
 }
 
 export const logout = () => {
-  dispatch(requestlogout())
-  return agent.logout().then(
-    res => dispatch(removeAuthTokenFromServer()).catch((err) => {
-      dispatch(logoutFailed(err))
+  console.log('logout')
+  return (dispatch, getState) => {
+    dispatch(requestLogout())
+    const token = getState().auth.authtoken
+    console.log(token)
+    return agent.logout(token).then(
+      res => dispatch(removeAuthTokenFromServer())
+    ).catch((e) => {
+      dispatch(logoutFailed())
+      console.log(e)
     })
-  )
+  }
 }
 
 export const signup = () => {

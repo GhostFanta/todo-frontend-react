@@ -2,11 +2,11 @@ import React, {Component} from 'react'
 import {Switch, Route} from 'react-router-dom'
 import PrivateRoute from 'react-private-route'
 import {connect} from 'react-redux'
-import Header from '../components/Header'
 import TodoLists from './TodoLists'
 import TodoList from './TodoList'
 import AddNewList from './AddNewList'
 import NotFound from '../components/Notmatch'
+import Header from '../containers/Header'
 import Signup from '../containers/Signup'
 import Login from '../containers/Login'
 import {fetchTodolists, fetchTodolistIfNeeded, invalidateTodolists} from "../actions/apiactions";
@@ -60,6 +60,7 @@ const mapStateToProps = state => {
     state.auth.authtoken !== null &&
     state.auth.authtoken !== undefined
   }
+
 }
 
 export default connect(mapStateToProps)(App)

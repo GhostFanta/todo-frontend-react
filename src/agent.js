@@ -17,13 +17,14 @@ const agent = {
       .accept('application/json')
   },
   logout: (token) => {
-    request.post(`${BASE_URL}/user/logout`)
+    console.log(`loggingout with token ${token}`)
+    return request.post(`${BASE_URL}/user/logout`)
       .set('Accept', 'application/json')
       .set('x-auth', token.toString())
       .then((res) => {
         console.log(res);
       }).catch((err) => {
-      console.log(res);
+      console.log(err);
     })
   },
 

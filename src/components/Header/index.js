@@ -18,7 +18,6 @@ const styles = {
     fontFamily: 'Lato',
     color: 'white',
     textDecoration: 'none'
-
   },
   grow: {
     flexGrow: 1
@@ -50,7 +49,7 @@ class Header extends Component {
               &nbsp; For better management
             </Typography>
             {
-              this.props.useremail ? (
+              this.props.isLoggedin ? (
                   <Button color="inherit" onClick={this.logout}>Logout</Button>
                 )
                 : (
